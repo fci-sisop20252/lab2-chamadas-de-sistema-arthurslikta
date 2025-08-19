@@ -30,6 +30,6 @@ int main() {
 /*
  * CONCEITOS:
  * - printf() é função de biblioteca (não uma syscall direta)
- * - Usa stdout (file descriptor 1) para saída
+ * - Usa stdout (file descriptor 1) para saída z    
  * - Pode usar buffering para agrupar dados
  */
