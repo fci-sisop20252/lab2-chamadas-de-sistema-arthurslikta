@@ -19,13 +19,13 @@ strace -e write ./ex1b_write
 **2. Por que há diferença entre printf() e write()?**
 
 ```
-[Sua análise aqui]
+Pois o printf() aciona mais syscalls enquanto o write() chama direto do kernel.
 ```
 
 **3. Qual implementação você acha que é mais eficiente? Por quê?**
 
 ```
-O printf é mais eficiente pois ele consegue acumular em buffers
+O printf é mais eficiente pois ele consegue acumular em buffers e evitar diversas syscalls.
 ```
 
 ---
@@ -46,13 +46,13 @@ strace -e open,read,close ./ex2_leitura
 **1. Por que o file descriptor não foi 0, 1 ou 2?**
 
 ```
-[Sua análise aqui]
+Pois o 0, 1 e 2 ja estão sendo usados respectivamente pela entrada, saída e erros.
 ```
 
 **2. Como você sabe que o arquivo foi lido completamente?**
 
 ```
-[Sua análise aqui]
+Pois o tamanho definido do buffer é de 127 bytes, o mesmo valor que o programa deu como lido.
 ```
 
 ---
@@ -60,32 +60,32 @@ strace -e open,read,close ./ex2_leitura
 ## Exercício 3 - Contador com Loop
 
 ### Resultados (BUFFER_SIZE = 64):
-- Linhas: _____ (esperado: 25)
-- Caracteres: _____
-- Chamadas read(): _____
-- Tempo: _____ segundos
+- Linhas: 24 (esperado: 25)
+- Caracteres: 1299
+- Chamadas read(): 21
+- Tempo: 0.000122 segundos
 
 ### Experimentos com buffer:
 
 | Buffer Size | Chamadas read() | Tempo (s) |
 |-------------|-----------------|-----------|
-| 16          |                 |           |
-| 64          |                 |           |
-| 256         |                 |           |
-| 1024        |                 |           |
+| 16          |  82             | 0.000230  |
+| 64          |  21             | 0.000122  |
+| 256         |  6              | 0.000063  |
+| 1024        |  2              | 0.000060  |
 
 ### Análise
 
 **1. Como o tamanho do buffer afeta o número de syscalls?**
 
 ```
-[Sua análise aqui]
+Quanto maior for o tamanho do buffer menos chamadas de sistemas é ocorrido.
 ```
 
 **2. Como você detecta o fim do arquivo?**
 
 ```
-[Sua análise aqui]
+Enquanto o read() não retorna 0, o arquivo continua sendo executado até que não há mais bytes a ser lidos.
 ```
 
 ---
