@@ -93,29 +93,29 @@ Enquanto o read() não retorna 0, o arquivo continua sendo executado até que n�
 ## Exercício 4 - Cópia de Arquivo
 
 ### Resultados:
-- Bytes copiados: _____
-- Operações: _____
-- Tempo: _____ segundos
-- Throughput: _____ KB/s
+- Bytes copiados: 1364
+- Operações: 6
+- Tempo: 0.000532 segundos
+- Throughput: 2503.82 KB/s
 
 ### Verificação:
 ```bash
 diff dados/origem.txt dados/destino.txt
 ```
-Resultado: [ ] Idênticos [ ] Diferentes
+Resultado: [x] Idênticos [ ] Diferentes
 
 ### Análise
 
 **1. Por que devemos verificar que bytes_escritos == bytes_lidos?**
 
 ```
-[Sua análise aqui]
+Para garantir que todo o conteúdo foi copiado de um para o outro.
 ```
 
 **2. Que flags são essenciais no open() do destino?**
 
 ```
-[Sua análise aqui]
+O_WRONLY, O_CREAT, O_TRUNC, para ler, criar e limpar respectivamente. 
 ```
 
 ---
@@ -127,19 +127,19 @@ Resultado: [ ] Idênticos [ ] Diferentes
 **1. Como as syscalls demonstram a transição usuário → kernel?**
 
 ```
-[Sua análise aqui]
+O usuário não pode acessar diretamente recursos do hardware, assim, para interagir com o kernel, usa-se as syscalls (usuário -> kernel).
 ```
 
 **2. Qual é o seu entendimento sobre a importância dos file descriptors?**
 
 ```
-[Sua análise aqui]
+Os file descriptors facilitam a manipulação de leitura e escrita de arquivos, podendo ler e escrever um arquivo ao mesmo tempo.
 ```
 
 **3. Discorra sobre a relação entre o tamanho do buffer e performance:**
 
 ```
-[Sua análise aqui]
+Quanto maior o tamanho do buffer, melhor é a performance, assim cada chamada de sistema pode ler uma maior quantidade de bytes, resultando no menor número de syscalls.
 ```
 
 ### Comparação de Performance
@@ -150,12 +150,12 @@ time ./ex4_copia
 time cp dados/origem.txt dados/destino_cp.txt
 ```
 
-**Qual foi mais rápido?** _____
+**Qual foi mais rápido?** O programa
 
 **Por que você acha que foi mais rápido?**
 
 ```
-[Sua análise aqui]
+Com o tamanho do buffer controlado, foi mais rápido manipular o arquivo.
 ```
 
 ---
